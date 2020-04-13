@@ -43,7 +43,7 @@ class AddRecipe extends React.Component {
 
         console.log(recipe);
 
-        //post request to mongoDB server
+        //second argument in axios.post is the object
         axios.post('http://localhost:5000/add', recipe)
         .then(res => console.log(res.data));
 
