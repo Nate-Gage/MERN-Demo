@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import '../App';
+import Recipe from './Recipe';
 
 class RecipesList extends Component {
     constructor(props) {
@@ -32,9 +33,15 @@ class RecipesList extends Component {
             <div>
                 <h1 className="header">My Recipes</h1>
                 <p>Click on a recipe below to view and edit details</p>
-                {this.state.recipes.map(recipe => {
-                    return <p>{recipe.title}</p>;
-                })}
+                {this.state.recipes.map(recipe => (
+                    <Recipe
+                        key={recipe.id}
+                        recipe={recipe}
+                        title={recipe.title}
+                        cooktime={recipe.cooktime}
+                        description={recipe.description}
+                    />
+                ))}
             </div>
         );
     }
