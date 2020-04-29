@@ -47,7 +47,7 @@ class AddRecipe extends React.Component {
         axios.post('http://localhost:5000/add', recipe)
         .then(res => console.log(res.data));
 
-        //window.location = '/';
+        window.location = '/recipes';
     }
     render() {
         return (

@@ -8,6 +8,13 @@ recipeRouter.route('/recipes').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+//GET RECIPE BY ID
+recipeRouter.route('/recipes/:id').get((req, res) => {
+    Recipe.findById(req.params.id)
+    .then(recipe => res.json(recipe))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 //ADD A RECIPE
 recipeRouter.route('/add').post((req, res) => {
     const title = req.body.title;
@@ -26,7 +33,7 @@ recipeRouter.route('/add').post((req, res) => {
 });
 
 //EDIT A RECIPE BY ID
-recipeRouter.route('/edit/:id').post((req, res) => {
+recipeRouter.route('/recipes/edit/:id').post((req, res) => {
     Recipe.findById(req.params.id)
     .then(recipe => {
         recipe.title = req.body.title;

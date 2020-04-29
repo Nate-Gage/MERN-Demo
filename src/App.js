@@ -5,6 +5,7 @@ import Nav from './components/Nav';
 import Home from './components/Home';
 import AddRecipe from './components/AddRecipe';
 import RecipesList from './components/RecipesList';
+import Edit from './components/Edit';
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/add" component={AddRecipe} />
           <Route path="/recipes" exact component={RecipesList} />
+          <Route path="/recipes/:id" />
+          <Route path="/edit/:id" component={Edit} />
         </Switch>
       </div>
     </Router>

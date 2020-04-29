@@ -1,7 +1,21 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import '../App';
-import Recipe from './Recipe';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+const Recipe = props => {
+
+    return (
+        <div>
+            <h3>{props.title}</h3>
+            <p>Cooktime: {props.cooktime} minutes</p>
+            <p>{props.description}</p>
+            <p>{props.id}</p>
+            <span><a href='#' onClick={() => { props.deleteRecipe(props.id) }}>DELETE</a> | <Link to={'/edit/' + props.id}>EDIT</Link></span>
+        </div>
+    );
+}
 
 class RecipesList extends Component {
     constructor(props) {
@@ -32,12 +46,11 @@ class RecipesList extends Component {
 
     deleteRecipe(id) {
         console.log('ID: ' + id);
-        axios.delete('http://localhost:5000/recipes/'+id)
-            .then(response => console.log(response.data));
-
-        this.setState({
-            recipes: this.state.recipes.filter(recipe => recipe._id !== id)
-        });
+        axios.delete('http://localhost:5000/recipes/' + id)
+            .then(
+                this.setState({
+                    recipes: this.state.recipes.filter(recipe => recipe._id !== id)
+                }));
     }
 
     render() {
@@ -60,6 +73,11 @@ class RecipesList extends Component {
         );
     }
 };
+
+Recipe.propTypes = {
+    title: PropTypes.string.isRequired,
+    cooktime: PropTypes.number.isRequired
+}
 
 export default RecipesList;
 
