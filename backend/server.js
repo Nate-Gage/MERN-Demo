@@ -24,9 +24,8 @@ connection.on('connected', () => {
 });
 
 //ROUTERS
-const recipesRouter = require('./routes/recipes.routes');
-
-app.use(recipesRouter);
+const wishlistRouter = require('../backend/routes/wishlist.routes');
+app.use(wishlistRouter);
 
 app.listen(port, () => {
     console.log(`Server is up on port ${port}`);

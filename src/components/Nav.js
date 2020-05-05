@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Logo from '../logo_icon.png';
 
 function Nav() {
     const navStyle = {
@@ -8,13 +9,13 @@ function Nav() {
 
     return (
         <nav>
-            <Link to="/"><h3>Logo</h3></Link>
+            <Link to="/"><img className="logo" src={Logo} alt="Logo Icon" /></Link>
             <ul className="nav-links">
                 <Link style={navStyle} to='/add'>
-                    <li>Add a Recipe</li>
+                    <li>Add an Item</li>
                 </Link>
-                <Link style={navStyle} to='/recipes'>
-                    <li>My Recipes</li>
+                <Link style={navStyle} to='/wishlist'>
+                    <li>My Wishlist</li>
                 </Link>
             </ul>
         </nav>

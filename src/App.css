@@ -6,9 +6,14 @@ nav {
   justify-content: space-around;
   align-items: center;
   min-height: 10vh;
-  background: rgb(89, 95, 97);
+  background: #47758f;
   color: white;
   text-decoration: none;
+}
+.logo {
+  width: 60px;
+  height: 60px;
+  padding: 5px;
 }
 .nav-links {
   width: 40%;
@@ -21,14 +26,29 @@ nav {
   text-align: center;
 }
 .addForm {
-  text-align: center;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 30px;
 }
-.addRecipe__input {
-  margin-bottom: 20px;
+.addItem__input {
+  margin-bottom: 15px;
 }
-.addRecipe__subheading {
+.addItem__subheading {
   font-size: 12px;
   padding-right: 5px;
+  font-weight: bold;
 }
+.listContainer {
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+.listCard {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
 
 

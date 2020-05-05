@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
+import '../App';
 
-class EditItem extends React.Component {
+class AddItem extends React.Component {
     constructor(props) {
         super(props);
 
@@ -16,20 +17,6 @@ class EditItem extends React.Component {
             notes: ''
         };
     };
-
-    componentDidMount() {
-        axios.get('http://localhost:5000/wishlist/' + this.props.match.params.id)
-            .then(res => {
-                console.log(res.data);
-                this.setState({
-                    title: res.data.title,
-                    price: res.data.price,
-                    notes: res.data.notes
-                })
-            })
-            .catch(error => console.log('Error: ' + error));
-    }
-
     onChangeTitle(e) {
         this.setState({
             title: e.target.value
@@ -49,16 +36,16 @@ class EditItem extends React.Component {
     addItem(e) {
         e.preventDefault();
 
-        const recipe = {
+        const wishlistItem = {
             title: this.state.title,
             price: this.state.price,
             notes: this.state.notes
         };
 
-        console.log(recipe);
+        console.log(wishlistItem);
 
         //second argument in axios.post is the object
-        axios.post('http://localhost:5000/wishlist/edit/' + this.props.match.params.id, recipe)
+        axios.post('http://localhost:5000/add', wishlistItem)
             .then(res => console.log(res.data));
 
         window.location = '/wishlist';
@@ -84,4 +71,4 @@ class EditItem extends React.Component {
     }
 };
 
-export default EditItem;
+export default AddItem;
