@@ -6,7 +6,12 @@ const wishlistSchema = new Schema({
     title: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        validate(value) {
+            if (value.length = 0) {
+                throw new Error('Item Name field cannot be left blank.');                
+            }
+        }
     },
     price: {
         type: Number,
@@ -17,7 +22,7 @@ const wishlistSchema = new Schema({
         trim: true,
         validate(value) {
             if (value.length < 4) {
-                throw new Error('Notes must be more than 4 characters long')
+                throw new Error('Notes must be more than 4 characters long');
             }
         }
     },

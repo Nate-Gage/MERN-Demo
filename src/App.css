@@ -1,14 +1,18 @@
 .App {
   text-align: center;
 }
+body {
+  background-color: rgb(238, 236, 231);
+}
 nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
   min-height: 10vh;
-  background: #47758f;
+  background: #40014de7;
   color: white;
   text-decoration: none;
+  font-size: 20px;
 }
 .logo {
   width: 60px;
@@ -21,15 +25,36 @@ nav {
   justify-content: space-around;
   align-items: center;
   list-style: none;
+  font-family: Open Sans Condensed;
+  font-weight: bold;
 }
 .header {
+  text-align: left;
+  font-family: Open Sans Condensed;
+  font-size: 18px;
+  color: rgb(54, 36, 56);
+}
+.wishlist__mainheader {
+  font-weight: bold;
   text-align: center;
+  font-family: Open Sans Condensed;
+  color: rgb(54, 36, 56);
+}
+.wishlist__subheader {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.add__mainheader {
+  font-weight: bold;
+  text-align: center;
+  font-family: Open Sans Condensed;
+  color: rgb(54, 36, 56);
 }
 .addForm {
   width: 300px;
   margin-left: auto;
   margin-right: auto;
-  padding: 30px;
+  padding: 10px 30px 30px 30px;
 }
 .addItem__input {
   margin-bottom: 15px;
@@ -40,14 +65,31 @@ nav {
   font-weight: bold;
 }
 .listContainer {
-  margin-bottom: 30px;
-  margin-top: 30px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 .listCard {
   width: 300px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 10px;
+}
+.cardTitle {
+  font-size: 24px;
+  font-family: Open Sans Condensed;
+  font-weight: bold;
+}
+.cardPrice {
+  font-size: 14px;
+}
+.cardNotes {
+  font-size: 16px;
+}
+.notesTitle {
+  font-size: 14px;
+}
+.notesAlert {
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 

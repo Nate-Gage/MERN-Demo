@@ -66,17 +66,22 @@ class EditItem extends React.Component {
     render() {
         return (
             <div>
-                <h1 className="header">Add a Recipe</h1>
+                <h1 className="header add__mainheader">ADD A WISH</h1>
                 <form onSubmit={this.addItem} className="addForm">
-                    <label className="addItem__subheading">Item Name</label><br />
-                    <input type="text" placeholder="e.g. 'New Shoes'" className="addItem__input" value={this.state.title} onChange={this.onChangeTitle} />
-                    <br />
-                    <label className="addItem__subheading">Price</label>
-                    <input type="text" className="addItem__input" value={this.state.price} onChange={this.onChangePrice} />
-                    <br />
-                    <h5 className="addItem__subheading">Add Notes</h5>
-                    <textarea className="addItem__input" value={this.state.notes} onChange={this.onChangeNotes}></textarea>
-                    <br />
+                    <div className="form-group">
+                        <label className="header">Item Name (required)</label><br />
+                        <input type="text" className="form-control" placeholder="e.g. 'New Shoes'" value={this.state.title} onChange={this.onChangeTitle} />
+                        {this.state.itemTitleAlert && <p className="formAlert">*Item title is required.</p>}
+                    </div>
+                    <div className="form-group">
+                        <label className="header">Price</label>
+                        <input type="text" className="form-control" value={this.state.price} onChange={this.onChangePrice} />
+                    </div>
+                    <div className="form-group">
+                        <label className="header">Add Notes (where item can be found, sales, etc.)</label>
+                        <textarea className="form-control" value={this.state.notes} onChange={this.onChangeNotes}></textarea>
+                        {this.state.isRightNotesLength && <p className="formAlert">*Notes must be more than 4 characters long.</p>}
+                    </div>
                     <button>Submit</button>
                 </form>
             </div>

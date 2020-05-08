@@ -46,8 +46,8 @@ class WishList extends Component {
     render() {
         return (
             <div className="container">
-                <h1 className="header">My Wishlist</h1>
-                <h4 className="header">Click on an item below to edit details</h4>
+                <h1 className="wishlist__mainheader">MY WISHLIST</h1>
+                <h4 className="header wishlist__subheader">Click on an item below to edit or delete details</h4>
                 {this.state.wishlist.map(item => (
                     <WishlistItem
                         deleteItem={this.deleteItem}
@@ -70,12 +70,12 @@ const WishlistItem = props => {
         <div className="listContainer">
             <Card className="listCard">
                 <CardContent>
-                    <Typography component="h1">{props.title}</Typography>
-                    <Typography color="textSecondary" component="p">Price: {props.price}</Typography>
-                    <Typography variant="body2" component="p">Notes: <br />
+                    <p className="cardTitle">{props.title}</p>
+                    <p className="cardPrice" color="textSecondary">Price: {props.price}</p>
+                    <p className="cardNotes"><span className="notesTitle">Notes:</span> <br />
                         {props.notes}
-                    </Typography>
-                    <Typography variant="body2"><a href='#' onClick={() => { props.deleteItem(props.id) }}>DELETE</a> | <Link to={'/edit/' + props.id}>EDIT</Link></Typography>
+                    </p>
+                    <p className="cardEditDelete"><a href='#' onClick={() => { props.deleteItem(props.id) }}>DELETE</a> | <Link to={'/edit/' + props.id}>EDIT</Link></p>
                 </CardContent>
             </Card>
         </div>
