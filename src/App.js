@@ -7,6 +7,7 @@ import AddItem from './components/AddItem';
 import Wishlist from './components/Wishlist';
 import Edit from './components/Edit';
 import Login from './components/Login';
+import AddUser from './components/AddUser';
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
           <Route path="/wishlist" exact component={Wishlist} />
           <Route path="/wishlist/:id" />
           <Route path="/edit/:id" component={Edit} />
-          <Route path="/login" component={Login} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/login/create" component={AddUser} />
         </Switch>
       </div>
     </Router>

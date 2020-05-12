@@ -44,7 +44,7 @@ class AddItem extends React.Component {
             notes: this.state.notes
         };
 
-        if (this.state.title.length == 0) {
+        if (this.state.title.length === 0) {
             return this.setState({
                 itemTitleAlert: true
             });

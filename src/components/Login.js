@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 class Login extends React.Component {
     constructor(props) {
@@ -7,7 +8,7 @@ class Login extends React.Component {
 
         this.onChangeEmail = this.onChangeEmail.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
-        this.addUser = this.addUser.bind(this);
+        this.loginUser = this.loginUser.bind(this);
 
         this.state = {
             email: '',
@@ -21,39 +22,39 @@ class Login extends React.Component {
     }
     onChangePassword(e) {
         this.setState({
-            passowrd: e.target.value
+            password: e.target.value
         });
     }
-    addUser(e) {
+    loginUser(e) {
         e.preventDefault();
 
         const user = {
             email: this.state.email,
-            password: this.state.password,
+            password: this.state.password
         };
-
         console.log(user);
 
         //second argument in axios.post is the object
         axios.post('http://localhost:5000/login', user)
-            .then(res => console.log(res.data));
-
-        window.location = '/';
+            .then(res => console.log('User logged in!'))
+            .catch(err => console.log('Invalid login: ' + err));
     }
     render() {
         return (
             <div>
                 <h1 className="add__mainheader">LOGIN</h1>
-                <form onSubmit={this.addUser} className="addForm">
+                <form onSubmit={this.loginUser} className="addForm">
                     <div className="form-group">
                         <label className="header">Email</label><br />
                         <input type="text" className="form-control" value={this.state.email} onChange={this.onChangeEmail} />
                     </div>
                     <div className="form-group">
                         <label className="header">Password</label>
-                        <input type="text" className="form-control" value={this.state.password} onChange={this.onChangePassword} />
+                        <input type="password" className="form-control" value={this.state.password} onChange={this.onChangePassword} />
+                        {this.state.passwordAlert && <p className="formAlert">*Passwords must be 6 characters or more. Cannot contain the word 'password'.</p>}
                     </div>
-                    <button>Login</button>
+                    <button className="btn btn-primary">Log In</button>
+                    <h3 className="createUserLink">Don't have an account? <br /><span><Link to='login/create'>Create one here.</Link></span></h3>
                 </form>
             </div>
         );

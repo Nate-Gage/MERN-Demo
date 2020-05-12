@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 
 class WishList extends Component {
     constructor(props) {
@@ -75,7 +74,7 @@ const WishlistItem = props => {
                     <p className="cardNotes"><span className="notesTitle">Notes:</span> <br />
                         {props.notes}
                     </p>
-                    <p className="cardEditDelete"><a href='#' onClick={() => { props.deleteItem(props.id) }}>DELETE</a> | <Link to={'/edit/' + props.id}>EDIT</Link></p>
+                    <p className="cardEditDelete"><button className="linkStyled" onClick={() => { props.deleteItem(props.id) }}>DELETE</button> | <Link to={'/edit/' + props.id}>EDIT</Link></p>
                 </CardContent>
             </Card>
         </div>

@@ -82,7 +82,7 @@ class EditItem extends React.Component {
                         <textarea className="form-control" value={this.state.notes} onChange={this.onChangeNotes}></textarea>
                         {this.state.isRightNotesLength && <p className="formAlert">*Notes must be more than 4 characters long.</p>}
                     </div>
-                    <button>Submit</button>
+                    <button className="btn btn-primary">Submit</button>
                 </form>
             </div>
         );
