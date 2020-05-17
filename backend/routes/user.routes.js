@@ -1,31 +1,34 @@
 const userRouter = require('express').Router();
 const User = require('../models/user.model');
+const auth = require('../middleware/auth');
 
 //CREATE USER
-userRouter.route('/login/create').post((req, res) => {
-    const name = req.body.name;
-    const email = req.body.email;
-    const password = req.body.password;
+userRouter.post('/login/create', async (req, res) => {
+    const user = new User(req.body);
 
-    const newUser = new User({
-        name,
-        email,
-        password
-    });
-
-    newUser.save()
-        .then(() => res.status(201).send('User created!'))
-        .catch(err => res.status(400).send('Error: ' + err));
+    try {
+        await user.save();
+        const token = await user.generateAuthToken();
+        res.status(201).send({ user, token });
+    } catch (err) {
+        res.status(400).send();
+    }
 });
 
 //LOGIN USER
 userRouter.post('/login', async (req, res) => {
     try {
-        const user = await User.findByCredentials(req.body.email, req.body.password)
-        res.send(user);
+        const user = await User.findByCredentials(req.body.email, req.body.password);
+        const token = await user.generateAuthToken()
+        res.status(200).send({ user, token });
     } catch (err) {
         res.status(400).send();
     }
+});
+
+//GET USER
+userRouter.get('/login/me', auth, async (req, res) => {
+    res.send(req.user);
 });
 
 module.exports = userRouter;

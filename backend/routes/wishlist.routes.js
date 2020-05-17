@@ -1,11 +1,19 @@
 const wishlistRouter = require('express').Router();
 let WishItem = require('../models/wishlist.model');
+const auth = require('../middleware/auth');
 
 //GET ALL WISHLIST ITEMS
-wishlistRouter.route('/wishlist').get((req, res) => {
+// wishlistRouter.route('/wishlist').get((req, res) => {
+//     WishItem.find()
+//         .then(items => res.json(items))
+//         .catch(err => res.status(400).json('Error: ' + err));
+// });
+
+//GET ALL WISHLIST ITEMS
+wishlistRouter.get('/wishlist', auth, async (req, res) => {
     WishItem.find()
-        .then(items => res.json(items))
-        .catch(err => res.status(400).json('Error: ' + err));
+    .then(items => res.send(items))
+    .catch(err => res.status(400).json('Error: ' + err));
 });
 
 //GET WISHLIST ITEM BY ID
@@ -16,20 +24,19 @@ wishlistRouter.route('/wishlist/:id').get((req, res) => {
 });
 
 //ADD A WISHLIST ITEM
-wishlistRouter.route('/add').post((req, res) => {
-    const title = req.body.title;
-    const price = Number(req.body.price);
-    const notes = req.body.notes;
-
-    const newItem = new WishItem({
-        title,
-        price,
-        notes
+wishlistRouter.post('/add', auth, async (req, res) => {
+    //const item = new WishItem(req.body);
+    const item = new WishItem({
+        ...req.body,
+        owner: req.user._id
     });
 
-    newItem.save()
-        .then(() => res.json('Wishlist item added!'))
-        .catch(err => res.status(400).json('Error: ' + err));
+    try {
+        await item.save();
+        res.status(201).send('Item added to wishlist!');
+    } catch (err) {
+        res.status(400).send(err);
+    }
 });
 
 //EDIT A WISHLIST ITEM BY ID

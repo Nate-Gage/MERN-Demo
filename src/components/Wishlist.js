@@ -18,7 +18,7 @@ class WishList extends Component {
     };
 
     componentDidMount() {
-        axios.get('http://localhost:5000/wishlist')
+        axios.get('http://localhost:5000/wishlist/')
             .then(res => {
                 if (res.data.length > 0) {
                     this.setState({

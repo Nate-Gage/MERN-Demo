@@ -13,6 +13,8 @@ class Login extends React.Component {
         this.state = {
             email: '',
             password: '',
+            sessionToken: '',
+            loginAlert: false
         };
     };
     onChangeEmail(e) {
@@ -32,12 +34,22 @@ class Login extends React.Component {
             email: this.state.email,
             password: this.state.password
         };
-        console.log(user);
 
         //second argument in axios.post is the object
         axios.post('http://localhost:5000/login', user)
-            .then(res => console.log('User logged in!'))
-            .catch(err => console.log('Invalid login: ' + err));
+            .then(res => {
+                if (res.status === 200) {
+                    this.setState({
+                        sessionToken: res.data.token
+                    });
+                    console.log(this.state.sessionToken);
+                    window.location = '/wishlist';
+                } else if (res.status !== 200) {
+                    this.setState({
+                        loginAlert: true
+                    });
+                }
+            });
     }
     render() {
         return (
@@ -55,6 +67,7 @@ class Login extends React.Component {
                     </div>
                     <button className="btn btn-primary">Log In</button>
                     <h3 className="createUserLink">Don't have an account? <br /><span><Link to='login/create'>Create one here.</Link></span></h3>
+                    {this.state.loginAlert && <p>Email or password is incorrect.</p>}
                 </form>
             </div>
         );
