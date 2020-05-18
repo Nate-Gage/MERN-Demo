@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -63,7 +63,6 @@ class Login extends React.Component {
                     <div className="form-group">
                         <label className="header">Password</label>
                         <input type="password" className="form-control" value={this.state.password} onChange={this.onChangePassword} />
-                        {this.state.passwordAlert && <p className="formAlert">*Passwords must be 6 characters or more. Cannot contain the word 'password'.</p>}
                     </div>
                     <button className="btn btn-primary">Log In</button>
                     <h3 className="createUserLink">Don't have an account? <br /><span><Link to='login/create'>Create one here.</Link></span></h3>
