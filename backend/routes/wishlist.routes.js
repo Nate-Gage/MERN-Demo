@@ -10,7 +10,7 @@ const auth = require('../middleware/auth');
 // });
 
 //GET ALL WISHLIST ITEMS
-wishlistRouter.get('/wishlist', auth, async (req, res) => {
+wishlistRouter.get('/wishlist', async (req, res) => {
     WishItem.find()
     .then(items => res.send(items))
     .catch(err => res.status(400).json('Error: ' + err));

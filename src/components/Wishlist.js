@@ -23,7 +23,7 @@ class WishList extends Component {
                 if (res.data.length > 0) {
                     this.setState({
                         wishlist: res.data.map(item => {
-                            return item
+                            return item;
                         })
                     });
                     console.log(this.state.wishlist);

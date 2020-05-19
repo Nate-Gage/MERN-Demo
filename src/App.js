@@ -5,9 +5,11 @@ import UserContext from './components/UserContext';
 import Nav from './components/Nav';
 import Home from './components/Home';
 import AddItem from './components/AddItem';
-import Wishlist from './components/Wishlist';
+//import Wishlist from './components/Wishlist';
+import UserWishlist from './components/UserWishlist';
 import Edit from './components/Edit';
-import Login from './components/Login';
+//import Login from './components/Login';
+import LoginUser from './components/LoginUser';
 import AddUser from './components/AddUser';
 
 function App() {
@@ -21,10 +23,10 @@ function App() {
           <UserContext.Provider value={{user, setUser}}>
             <Route path="/" exact component={Home} />
             <Route path="/add" component={AddItem} />
-            <Route path="/wishlist" exact component={Wishlist} />
+            <Route path="/wishlist" exact component={UserWishlist} />
             <Route path="/wishlist/:id" />
             <Route path="/edit/:id" component={Edit} />
-            <Route path="/login" exact component={Login} />
+            <Route path="/login" exact component={LoginUser} />
             <Route path="/login/create" component={AddUser} />
           </UserContext.Provider>
         </Switch>
