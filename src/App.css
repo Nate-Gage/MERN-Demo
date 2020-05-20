@@ -34,6 +34,10 @@ nav {
   font-size: 18px;
   color: rgb(54, 36, 56);
 }
+.loginBtn {
+  display: block;
+  margin-top: 20px;
+}
 .wishlist__mainheader {
   font-weight: bold;
   text-align: center;

@@ -26,7 +26,7 @@ class AddItem extends React.Component {
     }
     onChangePrice(e) {
         const amount = e.target.value;
-        if (!amount || amount.match(/^\$?[0-9]+(\.[0-9][0-9])?$/)) {
+        if (amount && amount.match(/^\$?[0-9]+(\.[0-9][0-9])?$/)) {
             this.setState({ price: amount });
         }
     }

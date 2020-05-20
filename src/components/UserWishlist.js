@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import UserContext from './UserContext';
+import { UserContext } from './UserContext';
 import axios from 'axios';
 import '../App';
 import { Link } from 'react-router-dom';
@@ -9,10 +9,10 @@ import CardContent from '@material-ui/core/CardContent';
 
 function UserWishlist() {
 
-    const [userToken, setUserToken] = useContext(UserContext);
+    const {userToken, setUserToken} = useContext(UserContext);
     const [wishlist, setWishlist] = useState([]);
 
-    useEffect(function () {
+    useEffect(function() {
         let config = {
             headers: {
                 userToken

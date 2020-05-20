@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import UserContext from './components/UserContext';
+import { UserContext } from './components/UserContext';
 import Nav from './components/Nav';
 import Home from './components/Home';
 import AddItem from './components/AddItem';
@@ -13,14 +13,16 @@ import LoginUser from './components/LoginUser';
 import AddUser from './components/AddUser';
 
 function App() {
-  const [user, setUser] = useState('hello');
+  const [userToken, setUserToken] = useState(null);
+
+  const value = useMemo(() => ({userToken, setUserToken}), [userToken, setUserToken]);
 
   return (
     <Router>
       <div>
         <Nav />
         <Switch>
-          <UserContext.Provider value={{user, setUser}}>
+          <UserContext.Provider value={value}>
             <Route path="/" exact component={Home} />
             <Route path="/add" component={AddItem} />
             <Route path="/wishlist" exact component={UserWishlist} />
