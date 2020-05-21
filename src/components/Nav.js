@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { UserContext } from './UserContext';
 import Logo from '../wishlist-logo.png';
 
 function Nav() {
+
+    const { userToken, setUserToken } = useContext(UserContext);
+
     const navStyle = {
         color: 'white'
     };
@@ -17,9 +21,15 @@ function Nav() {
                 <Link style={navStyle} to='/wishlist'>
                     <li>My Wishlist</li>
                 </Link>
-                <Link style={navStyle} to='/login'>
-                    <li>Login</li>
-                </Link>
+                {userToken ?
+                    <Link style={navStyle} to='/login'>
+                        <li>Log Out</li>
+                    </Link>
+                    :
+                    <Link style={navStyle} to='/login'>
+                        <li>Log In</li>
+                    </Link>
+                }
             </ul>
         </nav>
     )

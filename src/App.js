@@ -15,14 +15,14 @@ import AddUser from './components/AddUser';
 function App() {
   const [userToken, setUserToken] = useState(null);
 
-  const value = useMemo(() => ({userToken, setUserToken}), [userToken, setUserToken]);
+  const value = useMemo(() => ({ userToken, setUserToken }), [userToken, setUserToken]);
 
   return (
     <Router>
       <div>
-        <Nav />
         <Switch>
           <UserContext.Provider value={value}>
+            <Nav />
             <Route path="/" exact component={Home} />
             <Route path="/add" component={AddItem} />
             <Route path="/wishlist" exact component={UserWishlist} />

@@ -9,23 +9,20 @@ import CardContent from '@material-ui/core/CardContent';
 
 function UserWishlist() {
 
-    const {userToken, setUserToken} = useContext(UserContext);
+    const { userToken, setUserToken } = useContext(UserContext);
     const [wishlist, setWishlist] = useState([]);
 
-    useEffect(function() {
-        let config = {
-            headers: {
-                userToken
-            }
+    useEffect(function () {
+        const options = {
+            headers: { 'Authorization': userToken }
         };
 
-        axios.get('http://localhost:5000/wishlist/', config)
+        axios.get('http://localhost:5000/wishlist/', options)
             .then(res => {
                 if (res.data.length > 0) {
                     setWishlist(res.data.map(item => {
                         return item;
                     }));
-                    console.log(wishlist);
                 } else {
                     console.log('There was an error getting the wishlist');
                 }
@@ -41,6 +38,7 @@ function UserWishlist() {
 
     return (
         <div className="container">
+            {userToken ? <p>{userToken}</p> : <p>There's nothing here.</p>}
             <h1 className="wishlist__mainheader">MY WISHLIST</h1>
             <h4 className="header wishlist__subheader">Click on an item below to edit or delete details</h4>
             {wishlist.map(item => (

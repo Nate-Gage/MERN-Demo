@@ -9,6 +9,7 @@ function LoginUser() {
     const { userToken, setUserToken } = useContext(UserContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loginMsg, setLoginMsg] = useState('');
 
     const onChangeEmail = (e) => {
         setEmail(e.target.value);
@@ -23,16 +24,16 @@ function LoginUser() {
             email,
             password
         };
-        //second argument in axios.post is the object
+
+
         axios.post('http://localhost:5000/login', user)
             .then(res => {
                 if (res.status === 200) {
-                    console.log(res.data.token);
                     setUserToken(res.data.token);
-                    console.log(userToken);
-                    //window.location = '/wishlist';
+                    setLoginMsg(true);
                 }
             });
+
     };
 
     return (
@@ -48,13 +49,16 @@ function LoginUser() {
                         <label className="header">Password</label>
                         <input type="password" className="form-control" value={password} onChange={onChangePassword} />
                     </div>
-                    <p>{userToken}</p>
                 </form>
-                {
-                    userToken ?
-                        <button className="loginBtn btn btn-primary" onClick={(() => { setUserToken(null) })}>Log Out</button>
-                        :
-                        <button className="loginBtn btn btn-primary" onClick={loginUser}>Log In</button>
+                {loginMsg && <p>Successfully logged in!</p>}
+                {userToken ?
+                    <button className="loginBtn btn btn-primary" 
+                        onClick={(() => { 
+                            setUserToken(null) 
+                            setLoginMsg(false)
+                        })}>Log Out</button>
+                    :
+                    <button className="loginBtn btn btn-primary" onClick={loginUser}>Log In</button>
                 }
                 <h3 className="createUserLink">Don't have an account? <br /><span><Link to='login/create'>Create one here.</Link></span></h3>
             </div>
