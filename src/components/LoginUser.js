@@ -25,7 +25,6 @@ function LoginUser() {
             password
         };
 
-
         axios.post('http://localhost:5000/login', user)
             .then(res => {
                 if (res.status === 200) {
@@ -52,13 +51,16 @@ function LoginUser() {
                 </form>
                 {loginMsg && <p>Successfully logged in!</p>}
                 {userToken ?
-                    <button className="loginBtn btn btn-primary" 
-                        onClick={(() => { 
-                            setUserToken(null) 
+                    <button className="loginBtn btn btn-primary"
+                        onClick={(() => {
+                            setUserToken(null)
                             setLoginMsg(false)
-                        })}>Log Out</button>
+                        })}>Log Out
+                    </button>
                     :
-                    <button className="loginBtn btn btn-primary" onClick={loginUser}>Log In</button>
+                    <button className="loginBtn btn btn-primary"
+                        onClick={loginUser}>Log In
+                    </button>
                 }
                 <h3 className="createUserLink">Don't have an account? <br /><span><Link to='login/create'>Create one here.</Link></span></h3>
             </div>
