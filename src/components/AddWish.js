@@ -5,12 +5,13 @@ import { UserContext } from './UserContext';
 
 function AddWish() {
 
-    const { userToken, setUserToken } = useContext(UserContext);
+    const { userValue, setUserValue } = useContext(UserContext);
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState(0);
     const [notes, setNotes] = useState('');
     const [itemTitleAlert, setItemTitleAlert] = useState(false);
     const [isRightNotesLength, setIsRightNotesLength] = useState(false);
+    const [submittedMsg, setSubmittedMsg] = useState(false);
 
     const onChangeTitle = (e) => {
         setTitle(e.target.value);
@@ -27,6 +28,9 @@ function AddWish() {
     const addItem = (e) => {
         e.preventDefault();
 
+        const options = {
+            headers: { 'Authorization': userValue.token }
+        };
         const wishlistItem = {
             title,
             price,
@@ -45,34 +49,44 @@ function AddWish() {
             setIsRightNotesLength(false);
         }
 
-        console.log(wishlistItem);
-
         //second argument in axios.post is the object
-        axios.post('http://localhost:5000/add', wishlistItem)
-            .then(res => console.log(res.data));
+        axios.post('http://localhost:5000/add', wishlistItem, options)
+            .then(res => {
+                if (res.status === 201) {
+                    setSubmittedMsg(true);
+                }
+                console.log(res.data)
+            });
 
-        window.location = '/wishlist';
+        //window.location = '/wishlist';
     }
     return (
         <div>
-            <h1 className="add__mainheader">ADD A WISH</h1>
-            <form onSubmit={addItem} className="addForm">
-                <div className="form-group">
-                    <label className="header">Item Name (required)</label><br />
-                    <input type="text" className="form-control" placeholder="e.g. 'New Shoes'" value={title} onChange={onChangeTitle} />
-                    {itemTitleAlert && <p className="formAlert">*Item title is required.</p>}
+            {userValue ?
+                <div>
+                    <h1 className="add__mainheader">ADD A WISH</h1>
+                    <form onSubmit={addItem} className="addForm">
+                        <div className="form-group">
+                            <label className="header">Item Name (required)</label><br />
+                            <input type="text" className="form-control" placeholder="e.g. 'New Shoes'" value={title} onChange={onChangeTitle} />
+                            {itemTitleAlert && <p className="formAlert">*Item title is required.</p>}
+                        </div>
+                        <div className="form-group">
+                            <label className="header">Price</label>
+                            <input type="text" className="form-control" value={price} onChange={onChangePrice} />
+                        </div>
+                        <div className="form-group">
+                            <label className="header">Add Notes (links, sales, etc.)</label>
+                            <textarea className="form-control" value={notes} onChange={onChangeNotes}></textarea>
+                            {isRightNotesLength && <p className="formAlert">*Notes must be more than 4 characters long.</p>}
+                        </div>
+                        {submittedMsg && <p>Item added to wishlist!</p>}
+                        <button className="loginBtn btn btn-primary">Submit</button>
+                    </form>
                 </div>
-                <div className="form-group">
-                    <label className="header">Price</label>
-                    <input type="text" className="form-control" value={price} onChange={onChangePrice} />
-                </div>
-                <div className="form-group">
-                    <label className="header">Add Notes (links, sales, etc.)</label>
-                    <textarea className="form-control" value={notes} onChange={onChangeNotes}></textarea>
-                    {isRightNotesLength && <p className="formAlert">*Notes must be more than 4 characters long.</p>}
-                </div>
-                <button className="loginBtn btn btn-primary">Submit</button>
-            </form>
+                :
+                <h3 className="h3msg h3msg__add">Please sign in to add an item to your Wishlist</h3>
+            }
         </div>
     )
 }

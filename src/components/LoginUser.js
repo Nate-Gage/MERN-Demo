@@ -6,7 +6,7 @@ import '../App.css';
 
 function LoginUser() {
 
-    const { userToken, setUserToken } = useContext(UserContext);
+    const { userValue, setUserValue } = useContext(UserContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loginMsg, setLoginMsg] = useState('');
@@ -28,9 +28,14 @@ function LoginUser() {
         axios.post('http://localhost:5000/login', user)
             .then(res => {
                 if (res.status === 200) {
-                    setUserToken(res.data.token);
+                    setUserValue([
+                        res.data.token,
+                        res.data.owner
+                    ]);
+                    //setOwnerId(res.data.owner);
                     setLoginMsg(true);
                 }
+                //console.log(ownerId);
             });
 
     };
@@ -50,10 +55,10 @@ function LoginUser() {
                     </div>
                 </form>
                 {loginMsg && <p>Successfully logged in!</p>}
-                {userToken ?
+                {userValue ?
                     <button className="loginBtn btn btn-primary"
                         onClick={(() => {
-                            setUserToken(null)
+                            setUserValue(null)
                             setLoginMsg(false)
                         })}>Log Out
                     </button>
@@ -62,7 +67,7 @@ function LoginUser() {
                         onClick={loginUser}>Log In
                     </button>
                 }
-                <h3 className="createUserLink">Don't have an account? <br /><span><Link to='login/create'>Create one here.</Link></span></h3>
+                <h3 className="h3msg">Don't have an account? <br /><span><Link to='login/create'>Create one here.</Link></span></h3>
             </div>
 
         </div>

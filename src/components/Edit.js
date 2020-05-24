@@ -61,7 +61,7 @@ class EditItem extends React.Component {
         axios.post('http://localhost:5000/wishlist/edit/' + this.props.match.params.id, recipe)
             .then(res => console.log(res.data));
 
-        window.location = '/wishlist';
+        //window.location = '/wishlist';
     }
     render() {
         return (

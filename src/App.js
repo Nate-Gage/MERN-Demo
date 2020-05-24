@@ -14,9 +14,11 @@ import LoginUser from './components/LoginUser';
 import AddUser from './components/AddUser';
 
 function App() {
-  const [userToken, setUserToken] = useState(null);
+  const [userValue, setUserValue] = useState(null);
+  const [ownerId, setOwnerId] = useState(null);
 
-  const value = useMemo(() => ({ userToken, setUserToken }), [userToken, setUserToken]);
+
+  const value = useMemo(() => ({ userValue, setUserValue }), [userValue, setUserValue]);
 
   return (
     <Router>

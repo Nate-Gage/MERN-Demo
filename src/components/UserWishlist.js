@@ -9,12 +9,12 @@ import CardContent from '@material-ui/core/CardContent';
 
 function UserWishlist() {
 
-    const { userToken, setUserToken } = useContext(UserContext);
+    const { userValue, setUserValue } = useContext(UserContext);
     const [wishlist, setWishlist] = useState([]);
 
     useEffect(function () {
         const options = {
-            headers: { 'Authorization': userToken }
+            headers: { 'Authorization': userValue[0] }
         };
 
         axios.get('http://localhost:5000/wishlist/', options)
@@ -30,7 +30,6 @@ function UserWishlist() {
     }, [])
 
     const deleteItem = (id) => {
-        console.log('ID: ' + id);
         axios.delete('http://localhost:5000/wishlist/' + id)
             .then(
                 setWishlist(wishlist.filter(item => item._id !== id)));
@@ -38,7 +37,7 @@ function UserWishlist() {
 
     return (
         <div className="container">
-            {userToken ? <p>{userToken}</p> : <p>There's nothing here.</p>}
+            {userValue ? <p>{userValue}</p> : <p>There's nothing here.</p>}
             <h1 className="wishlist__mainheader">MY WISHLIST</h1>
             <h4 className="header wishlist__subheader">Click on an item below to edit or delete details</h4>
             {wishlist.map(item => (
