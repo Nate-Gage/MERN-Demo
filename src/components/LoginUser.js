@@ -28,16 +28,11 @@ function LoginUser() {
         axios.post('http://localhost:5000/login', user)
             .then(res => {
                 if (res.status === 200) {
-                    setUserValue([
-                        res.data.token,
-                        res.data.owner
-                    ]);
-                    //setOwnerId(res.data.owner);
+                    setUserValue([res.data.token, res.data.user._id]);
                     setLoginMsg(true);
                 }
-                //console.log(ownerId);
+                console.log(res.data.user._id);
             });
-
     };
 
     return (

@@ -5,7 +5,7 @@ import Logo from '../wishlist-logo.png';
 
 function Nav() {
 
-    const { userToken, setUserToken } = useContext(UserContext);
+    const { userToken } = useContext(UserContext);
 
     const navStyle = {
         color: 'white'

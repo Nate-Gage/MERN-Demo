@@ -15,8 +15,6 @@ import AddUser from './components/AddUser';
 
 function App() {
   const [userValue, setUserValue] = useState(null);
-  const [ownerId, setOwnerId] = useState(null);
-
 
   const value = useMemo(() => ({ userValue, setUserValue }), [userValue, setUserValue]);
 

@@ -3,12 +3,12 @@ let WishItem = require('../models/wishlist.model');
 const User = require('../models/user.model');
 const auth = require('../middleware/auth');
 
+
 //GET WISHLIST ITEMS BY USER
 wishlistRouter.get('/wishlist', auth, async (req, res) => {
-
+    console.log(req.headers.ownerid);
     try {
-        const item = await WishItem.find({ owner: "5ebaeab503cfe599b3c73c08" });
-
+        const item = await WishItem.find({ owner: req.headers.ownerid });
         if (!item) {
             return res.status(400).send();
         }

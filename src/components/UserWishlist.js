@@ -9,12 +9,16 @@ import CardContent from '@material-ui/core/CardContent';
 
 function UserWishlist() {
 
-    const { userValue, setUserValue } = useContext(UserContext);
+    const { userValue } = useContext(UserContext);
     const [wishlist, setWishlist] = useState([]);
 
     useEffect(function () {
+        console.log(userValue);
         const options = {
-            headers: { 'Authorization': userValue[0] }
+            headers: { 
+                'Authorization': userValue[0],
+                'OwnerId': userValue[1] 
+            }
         };
 
         axios.get('http://localhost:5000/wishlist/', options)

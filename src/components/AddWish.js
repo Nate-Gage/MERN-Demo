@@ -5,7 +5,7 @@ import { UserContext } from './UserContext';
 
 function AddWish() {
 
-    const { userValue, setUserValue } = useContext(UserContext);
+    const { userValue } = useContext(UserContext);
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState(0);
     const [notes, setNotes] = useState('');
