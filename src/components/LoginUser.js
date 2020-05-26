@@ -50,7 +50,7 @@ function LoginUser() {
                 </form>
                 {loginMsg && <p>Successfully logged in!</p>}
                 {userValue ?
-                    <button className="loginBtn btn btn-primary"
+                    <button className="loginBtn btn btn-success"
                         onClick={(() => {
                             setUserValue(null)
                             setLoginMsg(false)
