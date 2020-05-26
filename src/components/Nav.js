@@ -5,7 +5,7 @@ import Logo from '../wishlist-logo.png';
 
 function Nav() {
 
-    const { userToken } = useContext(UserContext);
+    const { userValue } = useContext(UserContext);
 
     const navStyle = {
         color: 'white'
@@ -21,7 +21,7 @@ function Nav() {
                 <Link style={navStyle} to='/wishlist'>
                     <li>My Wishlist</li>
                 </Link>
-                {userToken ?
+                {userValue ?
                     <Link style={navStyle} to='/login'>
                         <li>Log Out</li>
                     </Link>

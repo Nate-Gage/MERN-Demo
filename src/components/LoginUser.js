@@ -9,7 +9,7 @@ function LoginUser() {
     const { userValue, setUserValue } = useContext(UserContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [loginMsg, setLoginMsg] = useState('');
+    const [loginMsg, setLoginMsg] = useState(false);
 
     const onChangeEmail = (e) => {
         setEmail(e.target.value);

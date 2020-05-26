@@ -29,7 +29,7 @@ function AddWish() {
         e.preventDefault();
 
         const options = {
-            headers: { 'Authorization': userValue.token }
+            headers: { 'Authorization': userValue[0] }
         };
         const wishlistItem = {
             title,
