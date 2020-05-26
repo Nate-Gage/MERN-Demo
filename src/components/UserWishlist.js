@@ -12,25 +12,27 @@ function UserWishlist() {
     const { userValue } = useContext(UserContext);
     const [wishlist, setWishlist] = useState([]);
 
-    useEffect(function () {
-        console.log(userValue);
-        const options = {
-            headers: { 
-                'Authorization': userValue[0],
-                'OwnerId': userValue[1] 
-            }
-        };
-
-        axios.get('http://localhost:5000/wishlist/', options)
-            .then(res => {
-                if (res.data.length > 0) {
-                    setWishlist(res.data.map(item => {
-                        return item;
-                    }));
-                } else {
-                    console.log('There was an error getting the wishlist');
+    useEffect(() => {
+        if (userValue === null || userValue[0] === null ) {
+            return;
+        } else {
+            const options = {
+                headers: {
+                    'Authorization': userValue[0],
+                    'OwnerId': userValue[1]
                 }
-            });
+            };
+            axios.get('http://localhost:5000/wishlist/', options)
+                .then(res => {
+                    if (res.data.length > 0) {
+                        setWishlist(res.data.map(item => {
+                            return item;
+                        }));
+                    } else {
+                        console.log('There was an error getting the wishlist');
+                    }
+                });
+        }
     }, [])
 
     const deleteItem = (id) => {
@@ -41,20 +43,25 @@ function UserWishlist() {
 
     return (
         <div className="container">
-            {userValue ? <p>{userValue}</p> : <p>There's nothing here.</p>}
-            <h1 className="wishlist__mainheader">MY WISHLIST</h1>
-            <h4 className="header wishlist__subheader">Click on an item below to edit or delete details</h4>
-            {wishlist.map(item => (
-                <WishlistItem
-                    deleteItem={deleteItem}
-                    key={item._id}
-                    item={item}
-                    title={item.title}
-                    price={item.price}
-                    notes={item.notes}
-                    id={item._id}
-                />
-            ))}
+            {userValue ?
+                <div>
+                    <h1 className="wishlist__mainheader">MY WISHLIST</h1>
+                    <h4 className="header wishlist__subheader">Click on an item below to edit or delete details</h4>
+                    {wishlist.map(item => (
+                        <WishlistItem
+                            deleteItem={deleteItem}
+                            key={item._id}
+                            item={item}
+                            title={item.title}
+                            price={item.price}
+                            notes={item.notes}
+                            id={item._id}
+                        />
+                    ))}
+                </div>
+                :
+                <h3 className="h3msg h3msg__add">Please login to view your wishlist</h3>
+            }
         </div>
     );
 }

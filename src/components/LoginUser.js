@@ -31,7 +31,6 @@ function LoginUser() {
                     setUserValue([res.data.token, res.data.user._id]);
                     setLoginMsg(true);
                 }
-                console.log(res.data.user._id);
             });
     };
 

@@ -18,7 +18,7 @@ function AddWish() {
     };
     const onChangePrice = (e) => {
         const amount = e.target.value;
-        if (amount && amount.match(/^\$?[0-9]+(\.[0-9][0-9])?$/)) {
+        if (amount && amount.match(/^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*(?:\.[0-9]{2})?$/)) {
             setPrice(amount);
         }
     };
@@ -55,7 +55,6 @@ function AddWish() {
                 if (res.status === 201) {
                     setSubmittedMsg(true);
                 }
-                console.log(res.data)
             });
 
         //window.location = '/wishlist';
