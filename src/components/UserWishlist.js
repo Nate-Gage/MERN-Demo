@@ -13,6 +13,11 @@ function UserWishlist() {
     const [wishlist, setWishlist] = useState([]);
 
     useEffect(() => {
+
+        const json = localStorage.getItem('user');
+        const user = JSON.parse(json);
+        console.log(user);
+
         if (userValue === null || userValue[0] === null ) {
             return;
         } else {

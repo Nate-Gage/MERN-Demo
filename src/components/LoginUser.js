@@ -9,7 +9,6 @@ function LoginUser() {
     const { userValue, setUserValue } = useContext(UserContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [loginMsg, setLoginMsg] = useState(false);
 
     const onChangeEmail = (e) => {
         setEmail(e.target.value);
@@ -29,7 +28,7 @@ function LoginUser() {
             .then(res => {
                 if (res.status === 200) {
                     setUserValue([res.data.token, res.data.user._id]);
-                    setLoginMsg(true);
+                    localStorage.setItem('user', userValue);
                 }
             });
     };
@@ -38,28 +37,31 @@ function LoginUser() {
         <div>
             <h1 className="add__mainheader">LOGIN</h1>
             <div className="addForm">
-                <form>
-                    <div className="form-group">
-                        <label className="header">Email</label><br />
-                        <input type="text" className="form-control" value={email} onChange={onChangeEmail} />
-                    </div>
-                    <div className="form-group">
-                        <label className="header">Password</label>
-                        <input type="password" className="form-control" value={password} onChange={onChangePassword} />
-                    </div>
-                </form>
-                {loginMsg && <p>Successfully logged in!</p>}
                 {userValue ?
-                    <button className="loginBtn btn btn-primary"
-                        onClick={(() => {
-                            setUserValue(null)
-                            setLoginMsg(false)
-                        })}>Log Out
-                    </button>
+                    <div>
+                        <p>Successfully logged in!</p>
+                        <button className="loginBtn btn btn-danger"
+                            onClick={(() => {
+                                setUserValue(null)
+                            })}>Log Out
+                        </button>
+                    </div>
                     :
-                    <button className="loginBtn btn btn-primary"
-                        onClick={loginUser}>Log In
+                    <div>
+                        <form>
+                            <div className="form-group">
+                                <label className="header">Email</label><br />
+                                <input type="text" className="form-control" value={email} onChange={onChangeEmail} />
+                            </div>
+                            <div className="form-group">
+                                <label className="header">Password</label>
+                                <input type="password" className="form-control" value={password} onChange={onChangePassword} />
+                            </div>
+                        </form>
+                        <button className="loginBtn btn btn-primary"
+                            onClick={loginUser}>Log In
                     </button>
+                    </div>
                 }
                 <h3 className="h3msg">Don't have an account? <br /><span><Link to='login/create'>Create one here.</Link></span></h3>
             </div>
