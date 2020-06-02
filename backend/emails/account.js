@@ -7,5 +7,5 @@ sgMail.send({
     to: 'nate.d.gage@gmail.com',
     from: 'nate.d.gage@gmail.com',
     subject: 'Create a Wishlist with My App!',
-    text: 'Testing out an email from my Wishlist app'
+    text: 'View my Wishlist! Claim some of my items because I am not rich but want more stuff!'
 });

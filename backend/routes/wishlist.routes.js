@@ -4,8 +4,23 @@ const User = require('../models/user.model');
 const auth = require('../middleware/auth');
 
 
-//GET WISHLIST ITEMS BY USER
+//GET PRIVATE WISHLIST ITEMS BY USER
 wishlistRouter.get('/wishlist', auth, async (req, res) => {
+    console.log(req.headers.ownerid);
+    try {
+        const item = await WishItem.find({ owner: req.headers.ownerid });
+        if (!item) {
+            return res.status(400).send();
+        }
+
+        res.send(item);
+    } catch (err) {
+        res.status(500).send();
+    }
+});
+
+//GET PUBLIC WISHLIST FROM SENDER EMAIL
+wishlistRouter.get('/wishlist/public', async (req, res) => {
     console.log(req.headers.ownerid);
     try {
         const item = await WishItem.find({ owner: req.headers.ownerid });

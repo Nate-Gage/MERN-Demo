@@ -1,20 +1,26 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { UserContext } from './components/UserContext';
 import Nav from './components/Nav';
 import Home from './components/Home';
-//import AddItem from './components/AddItem';
 import AddWish from './components/AddWish';
-//import Wishlist from './components/Wishlist';
 import UserWishlist from './components/UserWishlist';
+import PublicWishlist from './components/PublicWishlist';
 import Edit from './components/Edit';
-//import Login from './components/Login';
 import LoginUser from './components/LoginUser';
 import AddUser from './components/AddUser';
 
 function App() {
-  const [userValue, setUserValue] = useState(null);
+  //Pass local storage data as default state
+  const initialValue = JSON.parse(localStorage.getItem('user'));
+  const [userValue, setUserValue] = useState(initialValue);
+
+  //Set user value in local storage
+  useEffect(() => {
+    const jsonData = JSON.stringify(userValue);
+    localStorage.setItem('user', jsonData);
+  }, [userValue])
 
   const value = useMemo(() => ({ userValue, setUserValue }), [userValue, setUserValue]);
 
@@ -27,7 +33,7 @@ function App() {
             <Route path="/" exact component={Home} />
             <Route path="/add" component={AddWish} />
             <Route path="/wishlist" exact component={UserWishlist} />
-            <Route path="/wishlist/:id" />
+            <Route path="/wishlist/public" component={PublicWishlist} />
             <Route path="/edit/:id" component={Edit} />
             <Route path="/login" exact component={LoginUser} />
             <Route path="/login/create" component={AddUser} />

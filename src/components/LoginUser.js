@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { UserContext } from './UserContext';
 import '../App.css';
+import { UserContext } from './UserContext';
 
 function LoginUser() {
 
@@ -28,7 +28,6 @@ function LoginUser() {
             .then(res => {
                 if (res.status === 200) {
                     setUserValue([res.data.token, res.data.user._id]);
-                    localStorage.setItem('user', userValue);
                 }
             });
     };

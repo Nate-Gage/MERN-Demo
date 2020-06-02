@@ -2,18 +2,22 @@ import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from './UserContext';
 import axios from 'axios';
 import '../App';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
-function UserWishlist() {
+function PublicWishlist() {
 
     const { userValue } = useContext(UserContext);
     const [wishlist, setWishlist] = useState([]);
 
     useEffect(() => {
-        if (userValue === null || userValue[0] === null) {
+
+        const json = localStorage.getItem('user');
+        const user = JSON.parse(json);
+        console.log(user);
+
+        if (userValue === null || userValue[0] === null ) {
             return;
         } else {
             const options = {
@@ -22,7 +26,7 @@ function UserWishlist() {
                     'OwnerId': userValue[1]
                 }
             };
-            axios.get('http://localhost:5000/wishlist/', options)
+            axios.get('http://localhost:5000/wishlist/public', options)
                 .then(res => {
                     if (res.data.length > 0) {
                         setWishlist(res.data.map(item => {
@@ -35,21 +39,14 @@ function UserWishlist() {
         }
     }, [])
 
-    const deleteItem = (id) => {
-        axios.delete('http://localhost:5000/wishlist/' + id)
-            .then(
-                setWishlist(wishlist.filter(item => item._id !== id)));
-    };
-
     return (
         <div className="container">
             {userValue ?
                 <div>
-                    <h1 className="wishlist__mainheader">MY WISHLIST</h1>
-                    <h4 className="header wishlist__subheader">Click on an item below to edit or delete details</h4>
+                    <h1 className="wishlist__mainheader">CLAIM AN ITEM</h1>
+                    <h4 className="header wishlist__subheader">Click 'claim' on an item to claim that item.</h4>
                     {wishlist.map(item => (
                         <WishlistItem
-                            deleteItem={deleteItem}
                             key={item._id}
                             item={item}
                             title={item.title}
@@ -77,7 +74,6 @@ const WishlistItem = props => {
                     <p className="cardNotes"><span className="notesTitle">Notes:</span> <br />
                         {props.notes}
                     </p>
-                    <p className="cardEditDelete"><button className="linkStyled" onClick={() => { props.deleteItem(props.id) }}>DELETE</button> | <Link to={'/edit/' + props.id}>EDIT</Link></p>
                 </CardContent>
             </Card>
         </div>
@@ -89,4 +85,4 @@ WishlistItem.propTypes = {
     price: PropTypes.number.isRequired
 }
 
-export default UserWishlist;
+export default PublicWishlist;
