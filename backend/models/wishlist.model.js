@@ -28,6 +28,10 @@ const wishlistSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'User'
+    },
+    claimed: {
+        type: Boolean,
+        required: true
     }
 }, {
     timestamps: true,

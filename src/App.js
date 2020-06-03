@@ -33,8 +33,8 @@ function App() {
             <Route path="/" exact component={Home} />
             <Route path="/add" component={AddWish} />
             <Route path="/wishlist" exact component={UserWishlist} />
-            <Route path="/wishlist/public" component={PublicWishlist} />
-            <Route path="/edit/:id" component={Edit} />
+            <Route path="/wishlist/claim/:id" component={PublicWishlist} />
+            <Route path="/wishlist/edit/:id" component={Edit} />
             <Route path="/login" exact component={LoginUser} />
             <Route path="/login/create" component={AddUser} />
           </UserContext.Provider>

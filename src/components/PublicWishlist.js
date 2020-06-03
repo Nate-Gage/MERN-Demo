@@ -5,71 +5,79 @@ import '../App';
 import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import checkmark from '../checkmark.png';
 
 function PublicWishlist() {
 
-    const { userValue } = useContext(UserContext);
     const [wishlist, setWishlist] = useState([]);
 
     useEffect(() => {
-
-        const json = localStorage.getItem('user');
-        const user = JSON.parse(json);
-        console.log(user);
-
-        if (userValue === null || userValue[0] === null ) {
-            return;
-        } else {
-            const options = {
-                headers: {
-                    'Authorization': userValue[0],
-                    'OwnerId': userValue[1]
+        axios.get('http://localhost:5000/wishlist/claim/')
+            .then(res => {
+                if (res.data.length > 0) {
+                    setWishlist(res.data.map(item => {
+                        return item;
+                    }));
+                } else {
+                    console.log('There was an error getting the wishlist');
                 }
-            };
-            axios.get('http://localhost:5000/wishlist/public', options)
-                .then(res => {
-                    if (res.data.length > 0) {
-                        setWishlist(res.data.map(item => {
-                            return item;
-                        }));
-                    } else {
-                        console.log('There was an error getting the wishlist');
-                    }
-                });
-        }
+            });
     }, [])
 
     return (
         <div className="container">
-            {userValue ?
-                <div>
-                    <h1 className="wishlist__mainheader">CLAIM AN ITEM</h1>
-                    <h4 className="header wishlist__subheader">Click 'claim' on an item to claim that item.</h4>
-                    {wishlist.map(item => (
-                        <WishlistItem
-                            key={item._id}
-                            item={item}
-                            title={item.title}
-                            price={item.price}
-                            notes={item.notes}
-                            id={item._id}
-                        />
-                    ))}
-                </div>
-                :
-                <h3 className="h3msg h3msg__add">Please login to view your wishlist</h3>
-            }
+
+            <div>
+                <h1 className="wishlist__mainheader">CLAIM AN ITEM</h1>
+                <h4 className="header wishlist__subheader">Click 'claim' on an item to claim that item.</h4>
+                {wishlist.map(item => (
+                    <WishlistItem
+                        key={item._id}
+                        item={item}
+                        title={item.title}
+                        price={item.price}
+                        notes={item.notes}
+                        id={item._id}
+                    />
+                ))}
+            </div>
         </div>
     );
 }
 
 const WishlistItem = props => {
 
+    const [claimItemStatus, setClaimItemStatus] = useState(false);
+
+    //SET CLAIMED STATUS IN DATABASE 
+    const claimItem = (id) => {
+        axios.patch('http://localhost:5000/wishlist/claim/' + id)
+            .then(res => res.status(200).send())
+            .catch(err => console.log(err));
+        setClaimItemStatus(true);
+    };
+
+    //SET UNCLAIMED STATUS IN DATABASE
+    const unclaimItem = (id) => {
+        axios.patch('http://localhost:5000/wishlist/claim/' + id)
+            .then(res => res.status(200).send())
+            .catch(err => console.log(err));
+        setClaimItemStatus(true);
+    };
+
     return (
         <div className="listContainer">
             <Card className="listCard">
                 <CardContent>
                     <p className="cardTitle">{props.title}</p>
+                    {claimItemStatus ?
+                        <span>
+                            <img className="claimedLogo" src={checkmark} alt="claimed logo" />
+                            <p className="claimedStyle" onClick={() => { unclaimItem(props.id) }}>Claimed</p>
+                        </span>
+                        :
+                        <p className="claimedStyle" onClick={() => { claimItem(props.id) }}>Claim Item</p>
+                    }
                     <p className="cardPrice" color="textSecondary">Price: {props.price}</p>
                     <p className="cardNotes"><span className="notesTitle">Notes:</span> <br />
                         {props.notes}

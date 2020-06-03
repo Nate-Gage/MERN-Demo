@@ -6,7 +6,6 @@ const auth = require('../middleware/auth');
 
 //GET PRIVATE WISHLIST ITEMS BY USER
 wishlistRouter.get('/wishlist', auth, async (req, res) => {
-    console.log(req.headers.ownerid);
     try {
         const item = await WishItem.find({ owner: req.headers.ownerid });
         if (!item) {
@@ -19,11 +18,12 @@ wishlistRouter.get('/wishlist', auth, async (req, res) => {
     }
 });
 
-//GET PUBLIC WISHLIST FROM SENDER EMAIL
-wishlistRouter.get('/wishlist/public', async (req, res) => {
-    console.log(req.headers.ownerid);
+//GET PUBLIC WISHLIST FROM SENDER
+wishlistRouter.get('/wishlist/claim/:id', async (req, res) => {
     try {
-        const item = await WishItem.find({ owner: req.headers.ownerid });
+        console.log(req)
+    console.log('asdfsadfsadfsadfasdfasd')
+        const item = await WishItem.find({ owner: req.params.id });
         if (!item) {
             return res.status(400).send();
         }
@@ -34,19 +34,31 @@ wishlistRouter.get('/wishlist/public', async (req, res) => {
     }
 });
 
-// //GET ALL WISHLIST ITEMS
-// wishlistRouter.get('/wishlist', auth, async (req, res) => {
-//     WishItem.find()
-//     .then(items => res.send(items))
-//     .catch(err => res.status(400).json('Error: ' + err));
-// });
+//UPDATE CLAIMED PROPERTY IN DATABASE
+wishlistRouter.patch('/wishlist', async (req, res) => {
+    const updates = Object.keys(req.body);
+    const allowedUpdates = ['title', 'completed'];
+    const validOperation = updates.every((update) => {
+        return allowedUpdates.includes(update);
+    })
 
-//GET WISHLIST ITEM BY ID
-// wishlistRouter.route('/wishlist/:id').get((req, res) => {
-//     WishItem.findById(req.params.id)
-//         .then(item => res.json(item))
-//         .catch(err => res.status(400).json('Error: ' + err));
-// });
+    if (!validOperation) {
+        res.status(400).send('Invalid Operation');
+    }
+
+    try {
+        const item = await WishItem.findOne({ owner: req.headers.ownerid })
+        if (!item) {
+            return res.status(400).send();
+        }
+
+        updates.forEach((update) => item[update] = req.body[update])
+        await item.save()
+
+    } catch (err) {
+        res.status(500).send(err);
+    }
+})
 
 //ADD A WISHLIST ITEM
 wishlistRouter.post('/add', auth, async (req, res) => {

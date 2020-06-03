@@ -86,7 +86,7 @@ nav {
   margin-top: 10px;
 }
 .listCard {
-  width: 300px;
+  width: 350px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -100,6 +100,25 @@ nav {
 }
 .cardNotes {
   font-size: 16px;
+}
+.claimedStyle {
+  float: right;
+  padding: 2px 5px 0px 15px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.unclaimedStyle {
+  float: right;
+  padding: 2px 5px 0px 15px;
+  font-size: 11px;
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}
+.claimedLogo {
+  height: 20px;
+  width: 20px;
+  float: right;
 }
 .notesTitle {
   font-size: 14px;
