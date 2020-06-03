@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const figlet = require('figlet');
+const chalk = require('chalk');
 
 require('dotenv').config();
 
@@ -31,6 +33,7 @@ app.use(wishlistRouter);
 app.use(userRouter);
 
 app.listen(port, () => {
+    console.log(chalk.red(figlet.textSync('WishList', {horizontalLayout: 'full'})))
     console.log(`Server is up on port ${port}`);
 });
 
