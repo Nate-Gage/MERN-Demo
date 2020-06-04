@@ -18,7 +18,7 @@ class EditItem extends React.Component {
     };
 
     componentDidMount() {
-        axios.get('http://localhost:5000/wishlist/edit/' + this.props.match.params.id)
+        axios.get('http://localhost:5000/wishlist/edit/'+this.props.match.params.id)
             .then(res => {
                 console.log(res.data);
                 this.setState({

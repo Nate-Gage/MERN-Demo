@@ -33,7 +33,7 @@ app.use(wishlistRouter);
 app.use(userRouter);
 
 app.listen(port, () => {
-    console.log(chalk.red(figlet.textSync('WishList', {horizontalLayout: 'full'})))
+    console.log(chalk.red(figlet.textSync('Wishlist', {horizontalLayout: 'full'})))
     console.log(`Server is up on port ${port}`);
 });
 

@@ -6,7 +6,8 @@ import Nav from './components/Nav';
 import Home from './components/Home';
 import AddWish from './components/AddWish';
 import UserWishlist from './components/UserWishlist';
-import PublicWishlist from './components/PublicWishlist';
+//import PublicWishlist from './components/PublicWishlist';
+import PublicClaimList from './components/PublicClaimList';
 import Edit from './components/Edit';
 import LoginUser from './components/LoginUser';
 import AddUser from './components/AddUser';
@@ -33,7 +34,7 @@ function App() {
             <Route path="/" exact component={Home} />
             <Route path="/add" component={AddWish} />
             <Route path="/wishlist" exact component={UserWishlist} />
-            <Route path="/wishlist/claim/:id" component={PublicWishlist} />
+            <Route path="/wishlist/claim/:id" component={PublicClaimList} />
             <Route path="/wishlist/edit/:id" component={Edit} />
             <Route path="/login" exact component={LoginUser} />
             <Route path="/login/create" component={AddUser} />

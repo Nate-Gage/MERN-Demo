@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { UserContext } from './UserContext';
+import React, { useState, useEffect } from 'react';
+
 import axios from 'axios';
 import '../App';
 import PropTypes from 'prop-types';
@@ -26,7 +26,6 @@ function PublicWishlist() {
 
     return (
         <div className="container">
-
             <div>
                 <h1 className="wishlist__mainheader">CLAIM AN ITEM</h1>
                 <h4 className="header wishlist__subheader">Click 'claim' on an item to claim that item.</h4>

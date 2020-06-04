@@ -21,8 +21,6 @@ wishlistRouter.get('/wishlist', auth, async (req, res) => {
 //GET PUBLIC WISHLIST FROM SENDER
 wishlistRouter.get('/wishlist/claim/:id', async (req, res) => {
     try {
-        console.log(req)
-    console.log('asdfsadfsadfsadfasdfasd')
         const item = await WishItem.find({ owner: req.params.id });
         if (!item) {
             return res.status(400).send();
@@ -66,7 +64,6 @@ wishlistRouter.post('/add', auth, async (req, res) => {
         ...req.body,
         owner: req.user._id
     });
-
     try {
         await item.save();
         res.status(201).send('Item added to wishlist!');
