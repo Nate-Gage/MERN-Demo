@@ -30,7 +30,8 @@ const wishlistSchema = new mongoose.Schema({
         ref: 'User'
     },
     claimed: {
-        type: Boolean
+        type: Boolean,
+        default: false
     }
 }, {
     timestamps: true,

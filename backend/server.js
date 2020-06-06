@@ -17,7 +17,8 @@ const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, { 
     useNewUrlParser: true, 
     useCreateIndex: true, 
-    useUnifiedTopology: true 
+    useUnifiedTopology: true ,
+    useFindAndModify: false 
 });
 
 const connection = mongoose.connection;
@@ -33,7 +34,7 @@ app.use(wishlistRouter);
 app.use(userRouter);
 
 app.listen(port, () => {
-    console.log(chalk.red(figlet.textSync('Wishlist', {horizontalLayout: 'full'})))
+    //console.log(chalk.red(figlet.textSync('Wishlist', {horizontalLayout: 'full'})))
     console.log(`Server is up on port ${port}`);
 });
 

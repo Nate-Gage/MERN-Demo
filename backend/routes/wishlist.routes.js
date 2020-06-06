@@ -33,26 +33,17 @@ wishlistRouter.get('/wishlist/claim/:id', async (req, res) => {
 });
 
 //UPDATE CLAIMED PROPERTY IN DATABASE
-wishlistRouter.patch('/wishlist', async (req, res) => {
-    const updates = Object.keys(req.body);
-    const allowedUpdates = ['title', 'completed'];
-    const validOperation = updates.every((update) => {
-        return allowedUpdates.includes(update);
-    })
-
-    if (!validOperation) {
-        res.status(400).send('Invalid Operation');
-    }
-
+wishlistRouter.patch('/claim/:id', async (req, res) => {
     try {
-        const item = await WishItem.findOne({ owner: req.headers.ownerid })
+        console.log(req.params.id);
+        let item = await WishItem.findOne({ _id: req.params.id });
+
         if (!item) {
             return res.status(400).send();
         }
 
-        updates.forEach((update) => item[update] = req.body[update])
+        item.claimed = true;
         await item.save()
-
     } catch (err) {
         res.status(500).send(err);
     }

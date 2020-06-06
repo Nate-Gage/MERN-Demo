@@ -35,6 +35,7 @@ function App() {
             <Route path="/add" component={AddWish} />
             <Route path="/wishlist" exact component={UserWishlist} />
             <Route path="/wishlist/claim/:id" component={PublicClaimList} />
+            <Route path="/claim:id" />
             <Route path="/wishlist/edit/:id" component={Edit} />
             <Route path="/login" exact component={LoginUser} />
             <Route path="/login/create" component={AddUser} />

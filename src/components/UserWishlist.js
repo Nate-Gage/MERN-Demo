@@ -48,7 +48,7 @@ function UserWishlist() {
                 <div>
                     <h1 className="wishlist__mainheader">MY WISHLIST</h1>
                     <h4 className="header wishlist__subheader">Click on an item below to edit or delete details. <br/>
-                    Or <a href="#">email</a> your wishlist for others to claim items.</h4>
+                    Or <span>email</span> your wishlist for others to claim items.</h4>
                     {wishlist.map(item => (
                         <WishlistItem
                             deleteItem={deleteItem}
@@ -70,35 +70,15 @@ function UserWishlist() {
 
 const WishlistItem = props => {
 
-    const [claimItemStatus, setClaimItemStatus] = useState(false);
-
-    //SET CLAIMED STATUS IN DATABASE 
-    const claimItem = (id) => {
-        axios.patch('http://localhost:5000/wishlist/claim/' + id)
-            .then(res => res.status(200).send())
-            .catch(err => console.log(err));
-        setClaimItemStatus(true);
-    };
-
-    //SET UNCLAIMED STATUS IN DATABASE
-    const unclaimItem = (id) => {
-        axios.patch('http://localhost:5000/wishlist/claim/' + id)
-            .then(res => res.status(200).send())
-            .catch(err => console.log(err));
-        setClaimItemStatus(false);
-    };
-
     return (
         <div className="listContainer">
             <Card className="listCard">
                 <CardContent>
-                    {claimItemStatus ?
+                    {props.claimed === true &&
                         <span>
                             <img className="claimedLogo" src={checkmark} alt="claimed logo" />
-                            <p className="claimedStyle" onClick={() => { unclaimItem(props.id) }}>Claimed</p>
+                            <p className="claimedStyle">Claimed</p>
                         </span>
-                        :
-                        <p className="unclaimedStyle" onClick={() => { claimItem(props.id) }}>Claim Item</p>
                     }
                     <p className="cardTitle">{props.title}</p>
                     <p className="cardPrice" color="textSecondary">Price: {props.price}</p>
