@@ -6,11 +6,10 @@ import Nav from './components/Nav';
 import Home from './components/Home';
 import AddWish from './components/AddWish';
 import UserWishlist from './components/UserWishlist';
-//import PublicWishlist from './components/PublicWishlist';
 import PublicClaimList from './components/PublicClaimList';
 import Edit from './components/Edit';
 import LoginUser from './components/LoginUser';
-import AddUser from './components/AddUser';
+import AddAccount from './components/AddAccount';
 
 function App() {
   //Pass local storage data as default state
@@ -35,10 +34,9 @@ function App() {
             <Route path="/add" component={AddWish} />
             <Route path="/wishlist" exact component={UserWishlist} />
             <Route path="/wishlist/claim/:id" component={PublicClaimList} />
-            <Route path="/claim:id" />
             <Route path="/wishlist/edit/:id" component={Edit} />
             <Route path="/login" exact component={LoginUser} />
-            <Route path="/login/create" component={AddUser} />
+            <Route path="/login/create" component={AddAccount} />
           </UserContext.Provider>
         </Switch>
       </div>

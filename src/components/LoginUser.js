@@ -34,7 +34,7 @@ function LoginUser() {
 
     return (
         <div>
-            <h1 className="add__mainheader">LOGIN</h1>
+            {userValue ? <h1 className="add__mainheader">Sign out</h1> : <h1 className="add__mainheader">Sign in</h1> }
             <div className="addForm">
                 {userValue ?
                     <div>
@@ -42,7 +42,7 @@ function LoginUser() {
                         <button className="loginBtn btn btn-danger"
                             onClick={(() => {
                                 setUserValue(null)
-                            })}>Log Out
+                            })}>Sign Out
                         </button>
                     </div>
                     :
@@ -50,15 +50,15 @@ function LoginUser() {
                         <form>
                             <div className="form-group">
                                 <label className="header">Email</label><br />
-                                <input type="text" className="form-control" value={email} onChange={onChangeEmail} />
+                                <input type="text" className="form-control form-input" value={email} onChange={onChangeEmail} />
                             </div>
                             <div className="form-group">
                                 <label className="header">Password</label>
-                                <input type="password" className="form-control" value={password} onChange={onChangePassword} />
+                                <input type="password" className="form-control form-input" value={password} onChange={onChangePassword} />
                             </div>
                         </form>
                         <button className="loginBtn btn btn-primary"
-                            onClick={loginUser}>Log In
+                            onClick={loginUser}>Sign In
                     </button>
                     </div>
                 }

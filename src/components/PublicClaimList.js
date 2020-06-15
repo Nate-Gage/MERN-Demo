@@ -26,6 +26,7 @@ class PublicClaimList extends React.Component {
                 }
             });
     }
+
     render() {
         return (
             <div className="container">
@@ -42,6 +43,7 @@ class PublicClaimList extends React.Component {
                             id={item._id}
                             owner={item.owner}
                             index={item.index}
+                            claimed={item.claimed}
                         />
                     ))}
                 </div>

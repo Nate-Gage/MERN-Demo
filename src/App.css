@@ -2,7 +2,9 @@
   text-align: center;
 }
 body {
-  background-color: rgb(238, 236, 231);
+  background-image: url(../src/backgroundimage.png);
+  background-repeat: no-repeat;
+  background: cov
 }
 nav {
   display: flex;
@@ -37,41 +39,52 @@ nav {
 .loginBtn {
   display: block;
   margin-top: 20px;
+  width: 100%
 }
 .wishlist__mainheader {
   font-weight: bold;
   text-align: center;
   font-family: Open Sans Condensed;
-  color: rgb(54, 36, 56);
+  color: white;
 }
 .wishlist__subheader {
   margin-bottom: 30px;
   text-align: center;
+  color: white;
+}
+.wishlist__scroll {
+  height: 500px;
+  overflow: auto;
+}
+::-webkit-scrollbar { 
+  display: none;
 }
 .linkStyled {
-    background: none!important;
-    border: none;
-    padding: 0!important;
-    /*input has OS specific font-family*/
-    color: #069;
-    text-decoration: none;
-    cursor: pointer;
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  /*input has OS specific font-family*/
+  color: #069;
+  text-decoration: none;
+  cursor: pointer;
 }
 .linkStyled:hover {
   text-decoration: underline;
 }
 .add__mainheader {
+  font-size: 42px;
   font-weight: bold;
   text-align: center;
   font-family: Open Sans Condensed;
-  color: rgb(54, 36, 56);
+  color: white;
   margin-top: 20px;
 }
 .addForm {
   width: 300px;
   margin-left: auto;
   margin-right: auto;
-  padding: 10px 30px 30px 30px;
+  padding: 20px 30px 30px 30px;
+  background-color: lightgray;
 }
 .addItem__input {
   margin-bottom: 15px;
@@ -107,6 +120,11 @@ nav {
   font-size: 11px;
   cursor: pointer;
 }
+.privateClaimedStyle {
+  float: right;
+  padding: 2px 5px 0px 15px;
+  font-size: 11px;
+}
 .unclaimedStyle {
   float: right;
   padding: 2px 5px 0px 15px;
@@ -133,7 +151,25 @@ nav {
 }
 .h3msg__add {
   text-align: center;
+  color: white;
+  font-size: 40px;
+}
+.h3msg__home {
+  width: 450px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  color: rgb(54, 36, 56);
+  font-size: 26px;
+  font-weight: bold;
+  padding-top: 30px;
 }
 
-
-
+.homeTitle {
+  font-size: 80px;
+  font-weight: bold;
+  font-family: Open Sans Condensed;
+  text-align: center;
+  color: white;
+  margin-top: 80px
+}

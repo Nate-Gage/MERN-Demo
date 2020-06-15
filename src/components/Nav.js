@@ -23,11 +23,11 @@ function Nav() {
                 </Link>
                 {userValue ?
                     <Link style={navStyle} to='/login'>
-                        <li>Log Out</li>
+                        <li>Sign Out</li>
                     </Link>
                     :
                     <Link style={navStyle} to='/login'>
-                        <li>Log In</li>
+                        <li>Sign In</li>
                     </Link>
                 }
             </ul>

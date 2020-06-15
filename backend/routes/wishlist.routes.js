@@ -32,10 +32,9 @@ wishlistRouter.get('/wishlist/claim/:id', async (req, res) => {
     }
 });
 
-//UPDATE CLAIMED PROPERTY IN DATABASE
+//SET CLAIMED PROPERTY IN DATABASE
 wishlistRouter.patch('/claim/:id', async (req, res) => {
     try {
-        console.log(req.params.id);
         let item = await WishItem.findOne({ _id: req.params.id });
 
         if (!item) {
@@ -47,7 +46,23 @@ wishlistRouter.patch('/claim/:id', async (req, res) => {
     } catch (err) {
         res.status(500).send(err);
     }
-})
+});
+
+//SET UNCLAIMED PROPERTY IN DATABASE
+wishlistRouter.patch('/unclaim/:id', async (req, res) => {
+    try {
+        let item = await WishItem.findOne({ _id: req.params.id });
+
+        if (!item) {
+            return res.status(400).send();
+        }
+
+        item.claimed = false;
+        await item.save()
+    } catch (err) {
+        res.status(500).send(err);
+    }
+});
 
 //ADD A WISHLIST ITEM
 wishlistRouter.post('/add', auth, async (req, res) => {

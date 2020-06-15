@@ -47,19 +47,22 @@ function UserWishlist() {
             {userValue ?
                 <div>
                     <h1 className="wishlist__mainheader">MY WISHLIST</h1>
-                    <h4 className="header wishlist__subheader">Click on an item below to edit or delete details. <br/>
+                    <h4 className="wishlist__subheader">Click on an item below to edit or delete details. <br />
                     Or <span>email</span> your wishlist for others to claim items.</h4>
-                    {wishlist.map(item => (
-                        <WishlistItem
-                            deleteItem={deleteItem}
-                            key={item._id}
-                            item={item}
-                            title={item.title}
-                            price={item.price}
-                            notes={item.notes}
-                            id={item._id}
-                        />
-                    ))}
+                    <div className="wishlist__scroll">
+                        {wishlist.map(item => (
+                            <WishlistItem
+                                deleteItem={deleteItem}
+                                key={item._id}
+                                item={item}
+                                title={item.title}
+                                price={item.price}
+                                notes={item.notes}
+                                id={item._id}
+                                claimed={item.claimed}
+                            />
+                        ))}
+                    </div>
                 </div>
                 :
                 <h3 className="h3msg h3msg__add">Please login to view your wishlist</h3>
@@ -77,7 +80,7 @@ const WishlistItem = props => {
                     {props.claimed === true &&
                         <span>
                             <img className="claimedLogo" src={checkmark} alt="claimed logo" />
-                            <p className="claimedStyle">Claimed</p>
+                            <p className="privateClaimedStyle">Claimed</p>
                         </span>
                     }
                     <p className="cardTitle">{props.title}</p>
