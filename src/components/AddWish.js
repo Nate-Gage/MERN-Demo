@@ -59,6 +59,7 @@ function AddWish() {
 
         //window.location = '/wishlist';
     }
+
     return (
         <div>
             {userValue ?
