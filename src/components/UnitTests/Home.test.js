@@ -4,6 +4,8 @@ import Home from '../Home';
 import { findByTestAttr, checkProps } from '../../../utils/index';
 import Adapter from 'enzyme-adapter-react-16';
 
+//hi
+
 const setUp = (props = {}) => {
     const component = shallow(<Home {...props} />);
     return component;
