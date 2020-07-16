@@ -4,26 +4,14 @@ import Home from '../Home';
 import { findByTestAttr, checkProps } from '../../../utils/index';
 import Adapter from 'enzyme-adapter-react-16';
 
-const setUp = (props={}) => {
-   const component = shallow(<Home {...props} />);
-   return component; 
+const setUp = (props = {}) => {
+    const component = shallow(<Home {...props} />);
+    return component;
 };
 
 describe('Home Component', () => {
 
     describe('Check PropTypes', () => {
-
-        test('Should not throw warning', () => {
-            const expectedProps = {
-                header: 'Test header'
-            };
-
-            const propsErr = checkProps(Home, expectedProps);
-            expect(propsErr).toBe(undefined);
-        });
-    });
-
-    describe('Have props', () => {
 
         let wrapper;
         beforeEach(() => {
@@ -38,6 +26,18 @@ describe('Home Component', () => {
             const h1 = findByTestAttr(wrapper, 'header');
             expect(h1.length).toBe(1);
         })
+    });
+
+    describe('Have props', () => {
+
+        test('Should not throw warning', () => {
+            const expectedProps = {
+                header: 'Test header'
+            };
+
+            const propsErr = checkProps(Home, expectedProps);
+            expect(propsErr).toBe(undefined);
+        });
     });
 
     describe('Have no props', () => {
