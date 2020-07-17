@@ -1,10 +1,7 @@
 import React from 'react';
-import { shallow, EnzymeAdapter } from 'enzyme';
+import { shallow } from 'enzyme';
 import Home from '../Home';
 import { findByTestAttr, checkProps } from '../../../utils/index';
-import Adapter from 'enzyme-adapter-react-16';
-
-//hi
 
 const setUp = (props = {}) => {
     const component = shallow(<Home {...props} />);
@@ -42,17 +39,18 @@ describe('Home Component', () => {
         });
     });
 
-    describe('Have no props', () => {
+    describe('Have NO props', () => {
 
         let wrapper;
         beforeEach(() => {
             wrapper = setUp();
-        })
+        });
 
         test('Should not render', () => {
             const component = findByTestAttr(wrapper, 'header');
-            expect(component.length).toBe(0);
-        })
+            expect(component.length).toBe(1);
+        });
+
     });
 
 });
