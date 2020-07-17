@@ -26,7 +26,7 @@ function App() {
 
   return (
     <Router>
-      <div>
+      <div data-test="appComponent">
         <Switch>
           <UserContext.Provider value={value}>
             <Nav />

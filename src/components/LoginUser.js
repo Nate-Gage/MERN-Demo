@@ -11,7 +11,7 @@ function LoginUser() {
     const [password, setPassword] = useState('');
 
     const onChangeEmail = (e) => {
-        setEmail(e.target.value);
+        setEmail(e.target.value);   
     };
     const onChangePassword = (e) => {
         setPassword(e.target.value);
@@ -33,7 +33,7 @@ function LoginUser() {
     };
 
     return (
-        <div>
+        <div data-test="loginComponent">
             {userValue ? <h1 className="add__mainheader">Sign out</h1> : <h1 className="add__mainheader">Sign in</h1> }
             <div className="addForm">
                 {userValue ?
